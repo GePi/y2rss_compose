@@ -1,0 +1,6 @@
+services:
+  y2dnl:
+    env_file:
+      - .env
+    image: docker.io/gepi/y2dnl:0.0.2
+    container_name: y2dnl2

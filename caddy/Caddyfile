@@ -1,0 +1,42 @@
+console.service-minio.ru {
+  reverse_proxy minio:9001
+  tls {
+	on_demand
+  }
+}
+
+storage.service-minio.ru {
+  reverse_proxy minio:9000 {
+        header_up X-Real-IP {remote_host}
+        header_up X-Forwarded-For {remote_host}
+        header_up X-Forwarded-Port {server_port}
+        header_up X-Forwarded-Proto {scheme}
+  }
+  tls {
+	on_demand
+  }
+}
+
+pgadmin.service-y2rss.ru {
+    reverse_proxy y2rss_pgadmin:80
+    encode gzip
+    tls {
+        on_demand
+    }
+}
+
+api.service-y2rss.ru {
+    reverse_proxy y2rss_api:8081
+    encode gzip
+    tls {
+        on_demand
+    }
+}
+
+service-y2rss.ru, www.service-y2rss.ru {
+    reverse_proxy y2rss_site:8080
+    encode gzip
+    tls {
+        on_demand
+    }
+}

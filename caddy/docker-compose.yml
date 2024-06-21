@@ -1,0 +1,23 @@
+services:
+  caddy:
+    image: caddy:latest
+    container_name: caddy
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile
+      - data:/data
+      - config:/config
+    ports:
+      - "80:80"
+      - "443:443"
+    networks:
+      - db_y2rss_network
+      - minio_default
+volumes:
+  data:
+  config:
+
+networks:
+  db_y2rss_network:
+    external: true
+  minio_default:
+    external: true

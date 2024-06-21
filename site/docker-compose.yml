@@ -1,0 +1,16 @@
+version: '3'
+
+services:
+  site:
+    container_name: y2rss_site
+    networks:
+      - db_y2rss_network
+    env_file:
+      - .env
+    restart: unless-stopped
+    image: docker.io/gepi/y2rss:0.0.2
+#    ports:
+#      - "8080:8080"
+networks:
+  db_y2rss_network:
+    external: true
